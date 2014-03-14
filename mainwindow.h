@@ -12,13 +12,14 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
-
+public slots:
+    void saveSvg();
 protected:
 
 private slots:
 
 private:
-
+    QString path;
     WhiteBoard *whiteboard;
 };
 

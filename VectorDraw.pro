@@ -1,5 +1,6 @@
-QT += widgets
+QT += widgets svg
 qtHaveModule(printsupport): QT += printsupport
+
 
 HEADERS       = \
     whiteboard.h \
@@ -11,3 +12,6 @@ SOURCES       = main.cpp \
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/widgets/scribble
 INSTALLS += target
+
+FORMS += \
+    mainwindow.ui
