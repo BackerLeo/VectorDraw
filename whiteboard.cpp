@@ -1,4 +1,7 @@
 #include <QtWidgets>
+#include <QGraphicsScene>
+#include <QPaintEvent>
+#include <QSvgGenerator>
 #include "whiteboard.h"
 
 WhiteBoard::WhiteBoard(QWidget *parent)
@@ -7,6 +10,7 @@ WhiteBoard::WhiteBoard(QWidget *parent)
     setAttribute(Qt::WA_StaticContents);
     modified = false;
     scribbling = false;
+    begin = true;
     myPenWidth = 1;
     myPenColor = Qt::black;
 }
@@ -42,14 +46,15 @@ void WhiteBoard::paintEvent(QPaintEvent *event)
 
 void WhiteBoard::resizeEvent(QResizeEvent *event)
 {
-    if (width() > image.width() || height() > image.height()) {
-        int newWidth = qMax(width() + 128, image.width());
-        int newHeight = qMax(height() + 128, image.height());
+    if (width() >= image.width() || height() >= image.height()) {
+        int newWidth = qMax(width() , image.width());
+        int newHeight = qMax(height() , image.height());
         resizeImage(&image, QSize(newWidth, newHeight));
         update();
     }
     QWidget::resizeEvent(event);
 }
+
 
 void WhiteBoard::drawLineTo(const QPoint &endPoint)
 {
@@ -71,9 +76,13 @@ void WhiteBoard::resizeImage(QImage *image, const QSize &newSize)
     if (image->size() == newSize)
         return;
 
+    if (begin) {
     QImage newImage(newSize, QImage::Format_RGB32);
     newImage.fill(qRgb(255, 255, 255));
     QPainter painter(&newImage);
     painter.drawImage(QPoint(0, 0), *image);
     *image = newImage;
+    begin = false;
+    }
+
 }
