@@ -19,8 +19,9 @@ protected:
 private slots:
 
 private:
-    QString path;
+    //QString path;
     WhiteBoard *whiteboard;
+    //WhiteBoard *whiteboardsvg;
 };
 
 #endif
