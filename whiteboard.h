@@ -5,6 +5,10 @@
 #include <QImage>
 #include <QPoint>
 #include <QWidget>
+#include <QSvgGenerator>
+#include <QtWidgets>
+#include <QGraphicsScene>
+#include <QPaintEvent>
 
 //! [0]
 class WhiteBoard : public QWidget
@@ -19,6 +23,10 @@ public:
 
     QColor penColor() const { return myPenColor; }
     int penWidth() const { return myPenWidth; }
+
+    void drawBackground(QPainter *p, const QRectF &rect);
+    void svgSaver();
+
 
 public slots:
 
@@ -35,9 +43,15 @@ private:
 
     bool modified;
     bool scribbling;
+    bool begin;
+    bool beginDrawing;
     int myPenWidth;
     QColor myPenColor;
     QImage image;
     QPoint lastPoint;
+    QString path;
+    QSvgGenerator generator;
+    QPainter paintersvg;
+
 };
 #endif
