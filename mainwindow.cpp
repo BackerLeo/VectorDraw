@@ -9,9 +9,9 @@
 MainWindow::MainWindow()
 {
     QMenu *fileMenu = new QMenu(tr("&File"), this);
-    QAction *saveAction = fileMenu->addAction(tr("&Save..."));
+    QAction *saveAction = fileMenu->addAction(tr("&Save and Exit"));
     saveAction->setShortcut(QKeySequence(tr("Ctrl+S")));
-    QAction *openAction = fileMenu->addAction(tr("&Open..."));
+    //QAction *openAction = fileMenu->addAction(tr("&Open..."));
     //openAction->setShortcut(QKeySequence(tr("Ctrl+O")));
     QAction *quitAction = fileMenu->addAction(tr("E&xit"));
     quitAction->setShortcuts(QKeySequence::Quit);
@@ -24,15 +24,19 @@ MainWindow::MainWindow()
 
     whiteboard = new WhiteBoard;
     setCentralWidget(whiteboard);
+
     setWindowTitle(tr("VectorDraw"));
     resize(500, 500);
+
+
 }
 
 
 //! [save SVG]
 void MainWindow::saveSvg()
 {
-    QString newPath = QFileDialog::getSaveFileName(this, tr("Save SVG"),
+    whiteboard->svgSaver();
+    /*QString newPath = QFileDialog::getSaveFileName(this, tr("Save SVG"),
         path, tr("SVG files (*.svg)"));
 
     if (newPath.isEmpty())
@@ -52,9 +56,11 @@ void MainWindow::saveSvg()
     QPainter painter;
     painter.begin(&generator);
 //![begin painting]
-    whiteboardsvg = new WhiteBoard;
+    //whiteboardsvg = new WhiteBoard;
     setCentralWidget(whiteboard);
 //![end painting]
     painter.end();
+
+    */
 }
 
