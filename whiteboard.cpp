@@ -1,7 +1,3 @@
-#include <QtWidgets>
-#include <QGraphicsScene>
-#include <QPaintEvent>
-#include <QSvgGenerator>
 #include "whiteboard.h"
 
 WhiteBoard::WhiteBoard(QWidget *parent)
@@ -13,6 +9,8 @@ WhiteBoard::WhiteBoard(QWidget *parent)
     begin = true;
     myPenWidth = 1;
     myPenColor = Qt::black;
+    path = "";
+    beginDrawing = true;
 }
 
 void WhiteBoard::mousePressEvent(QMouseEvent *event)
@@ -67,7 +65,47 @@ void WhiteBoard::drawLineTo(const QPoint &endPoint)
     int rad = (myPenWidth / 2) + 2;
     update(QRect(lastPoint, endPoint).normalized()
                                      .adjusted(-rad, -rad, +rad, +rad));
+
+    //painting on the svg
+
+    if (beginDrawing)
+    {
+        QString newPath = QFileDialog::getSaveFileName(this, tr("Save SVG"),
+            path, tr("SVG files (*.svg)"));
+
+        if (newPath.isEmpty())
+            return;
+
+        path = newPath;
+        generator.setFileName(path);
+        generator.setSize(QSize(500, 500));
+        generator.setViewBox(QRect(0, 0, 500, 500));
+        generator.setTitle(tr("SVG Drawing"));
+        generator.setDescription(tr("An SVG drawing created by VectorDraw"));
+        paintersvg.begin(&generator);
+
+
+    }
+    //QPainter painter;
+    if (beginDrawing)
+    {
+        paintersvg.fillRect(QRect(0, 0, 500, 500), Qt::white);
+        beginDrawing = false;
+    }
+    paintersvg.setClipRect(QRect(0, 0, 500, 500));
+    paintersvg.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
+                        Qt::RoundJoin));
+    paintersvg.drawLine(QLine(lastPoint, endPoint));
+    //paintersvg.end();
+
     lastPoint = endPoint;
+
+
+}
+
+ void WhiteBoard::svgSaver()
+{
+    paintersvg.end();
 }
 
 
