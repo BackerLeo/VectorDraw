@@ -1,0 +1,29 @@
+
+#ifndef QUADRORABISCO_H
+#define QUADRORABISCO_H
+
+#include <QColor>
+#include <QImage>
+#include <QPoint>
+#include <QWidget>
+
+class QuadroRabisco : public QWidget
+{
+    Q_OBJECT
+
+public:
+    QuadroRabisco(QWidget *parent = 0);
+
+public slots:
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
+    void resizeEvent(QResizeEvent *event);
+
+private:
+    void drawLineTo(const QPoint &endPoint);
+    void resizeImage(QImage *image, const QSize &newSize);
+};
+#endif

@@ -5,6 +5,7 @@
 #include <QMainWindow>
 
 class WhiteBoard;
+class BlackBoard;
 
 class MainWindow : public QMainWindow
 {
@@ -12,14 +13,18 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
-
+public slots:
+    void saveSvg();
 protected:
 
 private slots:
 
 private:
-
+    QString path;
     WhiteBoard *whiteboard;
+    BlackBoard *blackboard;
+    //WhiteBoard *whiteboardsvg;
+
 };
 
 #endif
