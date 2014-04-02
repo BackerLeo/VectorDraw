@@ -14,6 +14,16 @@ WhiteBoard::WhiteBoard(QWidget *parent)
     beginDrawing = true;
 }
 
+void WhiteBoard::setPenColor(const QColor &newColor)
+{
+    myPenColor = newColor;
+}
+
+void WhiteBoard::setPenWidth(int newWidth)
+{
+    myPenWidth = newWidth;
+}
+
 void WhiteBoard::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {

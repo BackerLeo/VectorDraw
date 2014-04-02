@@ -27,7 +27,6 @@ public:
     void svgSaver();
     QString oldPath;
 
-
 public slots:
 
 

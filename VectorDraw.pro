@@ -4,12 +4,10 @@ qtHaveModule(printsupport): QT += printsupport
 
 HEADERS       = \
     whiteboard.h \
-    mainwindow.h \
-    blackboard.h
+    mainwindow.h
 SOURCES       = main.cpp \
                 mainwindow.cpp \
-    whiteboard.cpp \
-    blackboard.cpp
+    whiteboard.cpp
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/widgets/scribble

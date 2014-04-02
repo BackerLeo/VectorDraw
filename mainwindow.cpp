@@ -5,7 +5,6 @@
 #include <QFile>
 #include "mainwindow.h"
 #include "whiteboard.h"
-#include "blackboard.h"
 
 MainWindow::MainWindow()
 {
