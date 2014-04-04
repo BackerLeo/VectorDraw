@@ -11,6 +11,7 @@ MainWindow::MainWindow()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     QAction *saveAction = fileMenu->addAction(tr("&Save and Exit"));
     saveAction->setShortcut(QKeySequence(tr("Ctrl+S")));
+    QAction *penColorAct = fileMenu->addAction(tr("Change Color"));
     //QAction *openAction = fileMenu->addAction(tr("&Open..."));
     //openAction->setShortcut(QKeySequence(tr("Ctrl+O")));
     QAction *quitAction = fileMenu->addAction(tr("E&xit"));
@@ -21,6 +22,7 @@ MainWindow::MainWindow()
     connect(saveAction, SIGNAL(triggered()), this, SLOT(saveSvg()));
     //connect(openAction, SIGNAL(triggered()), this, SLOT(openSvg()));
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
 
     whiteboard = new WhiteBoard;
     //blackboard = new BlackBoard;
@@ -75,3 +77,10 @@ void MainWindow::saveSvg()
     qDebug() << newPath;
     qDebug() << QFile::copy(oldPath, newPath);
 }
+
+void MainWindow::penColor()
+ {
+     QColor newColor = QColorDialog::getColor(whiteboard->penColor());
+     if (newColor.isValid())
+         whiteboard->setPenColor(newColor);
+ }

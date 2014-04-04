@@ -15,6 +15,7 @@ public:
     MainWindow();
 public slots:
     void saveSvg();
+    void penColor();
 protected:
 
 private slots:
@@ -23,6 +24,7 @@ private:
     QString path;
     WhiteBoard *whiteboard;
     BlackBoard *blackboard;
+    QAction *penColorAct;
     //WhiteBoard *whiteboardsvg;
 
 };
