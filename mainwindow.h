@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <QMainWindow>
+#include "premadeforms.h"
 
 class WhiteBoard;
 class BlackBoard;
@@ -13,20 +14,29 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+    WhiteBoard *whiteboard;
 public slots:
     void saveSvg();
     void penColor();
+    void backColor();
+    void free();
+    void Ellipse();
+    void Rectangle();
+    void StraightLine();
+    void Triangle();
+
 protected:
 
 private slots:
 
 private:
     QString path;
-    WhiteBoard *whiteboard;
-    BlackBoard *blackboard;
-    QAction *penColorAct;
-    //WhiteBoard *whiteboardsvg;
 
+    //BlackBoard *blackboard;
+    QAction *penColorAct;
+    QAction *backColorAct;
+    PreMadeForms *forms;
+    //WhiteBoard *whiteboardsvg;
 };
 
 #endif
